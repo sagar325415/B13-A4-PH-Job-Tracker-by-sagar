@@ -14,12 +14,39 @@ const allBtn = document.getElementById('all-btn')
 const interviewBtn = document.getElementById('interview-btn')
 const rejectedBtn = document.getElementById('rejected-btn')
 
+
+// calculateCount for lengthcount
+
 function calculateCount() {
-    Total.innerText = allCardSection.children.length
-    rejected.innerText = rejectedList.length
-    interview.innerText = interviewList.length
+    const totalJobs = allCardSection.children.length;
+    const interviewJobs = interviewList.length;
+    const rejectedJobs = rejectedList.length;
+
+
+    Total.innerText = totalJobs;
+    interview.innerText = interviewJobs;
+    rejected.innerText = rejectedJobs;
+
+
+    const jobCountText = () => {
+        if (currentStatus === 'all-btn') {
+            return `${totalJobs} jobs`;
+        } else if (currentStatus === 'interview-btn') {
+            return `${interviewJobs} of ${totalJobs} jobs`;
+        } else if (currentStatus === 'rejected-btn') {
+            return `${rejectedJobs} of ${totalJobs} jobs`;
+        }
+    }
+
+    document.getElementById('job-count').innerText = jobCountText();
 }
+
 calculateCount()
+
+
+
+// troggoling
+
 
 function toggleStyle(id) {
     allBtn.classList.add('bg-white', 'text-[#64748B]')
@@ -40,17 +67,23 @@ function toggleStyle(id) {
         allCardSection.classList.add('hidden');
         filterSection.classList.remove('hidden')
         rendering()
+        calculateCount();
     }
     else if (id == 'all-btn') {
         allCardSection.classList.remove('hidden');
         filterSection.classList.add('hidden')
+        calculateCount();
     }
     else if (id == 'rejected-btn') {
         allCardSection.classList.add('hidden');
         filterSection.classList.remove('hidden')
         rendering2()
+        calculateCount();
     }
 }
+
+
+// delegation
 
 mainContainer.addEventListener('click', function (event) {
 
@@ -62,7 +95,7 @@ mainContainer.addEventListener('click', function (event) {
         const salary = parentNode.querySelector('.salary').innerText
         const postDSC = parentNode.querySelector('.postDSC').innerText
 
-        
+
         parentNode.querySelector('.applyBtn').innerText = 'INTERVIEW'
 
         const cardInfo = {
@@ -94,7 +127,7 @@ mainContainer.addEventListener('click', function (event) {
         const salary = parentNode.querySelector('.salary').innerText
         const postDSC = parentNode.querySelector('.postDSC').innerText
 
-       
+
         parentNode.querySelector('.applyBtn').innerText = 'REJECTED'
 
         const cardInfo = {
@@ -117,19 +150,19 @@ mainContainer.addEventListener('click', function (event) {
         }
         calculateCount()
     }
-    
+
     else if (event.target.closest('.fa-trash-can')) {
         const parentNode = event.target.closest('.card')
         const company = parentNode.querySelector('.company').innerText;
 
-        // UI theke remove
+
         parentNode.remove();
 
-        // Array theke remove
+
         interviewList = interviewList.filter(item => item.company != company);
         rejectedList = rejectedList.filter(item => item.company != company);
 
-        // Filtered view render thakle update hobe
+
         if (currentStatus == 'interview-btn') rendering();
         if (currentStatus == 'rejected-btn') rendering2();
 
@@ -141,18 +174,18 @@ function rendering() {
     filterSection.innerHTML = ''
 
 
-    // shurte interview kali takle eta dekabe
-   if (interviewList.length === 0) {
-    filterSection.innerHTML = `
+    // shurte interview kali takle eta dekabo
+    if (interviewList.length === 0) {
+        filterSection.innerHTML = `
     <div class="text-center py-16">
 
         <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
         <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
         <p class="text-gray-500">You haven't marked any job as Interview yet.</p>
     </div>`;
-    calculateCount();
-    return;
-}
+        calculateCount();
+        return;
+    }
     for (let interviewData of interviewList) {
         let div = document.createElement('div');
         div.className = 'card bg-white shadow flex justify-between p-6 mb-4'
