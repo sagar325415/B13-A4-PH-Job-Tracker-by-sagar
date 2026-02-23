@@ -29,11 +29,16 @@ function calculateCount() {
 
 
     const jobCountText = () => {
-        if (currentStatus === 'all-btn') {
+        if (currentStatus === 'all-btn') 
+        {
             return `${totalJobs} jobs`;
-        } else if (currentStatus === 'interview-btn') {
+        } 
+        else if (currentStatus === 'interview-btn') 
+        {
             return `${interviewJobs} of ${totalJobs} jobs`;
-        } else if (currentStatus === 'rejected-btn') {
+        } 
+        else if (currentStatus === 'rejected-btn') 
+        {
             return `${rejectedJobs} of ${totalJobs} jobs`;
         }
     }
@@ -96,7 +101,14 @@ mainContainer.addEventListener('click', function (event) {
         const postDSC = parentNode.querySelector('.postDSC').innerText
 
 
-        parentNode.querySelector('.applyBtn').innerText = 'INTERVIEW'
+        // parentNode.querySelector('.applyBtn').innerText = 'INTERVIEW'
+
+        const applyBtn = parentNode.querySelector('.applyBtn');
+
+        applyBtn.classList.remove('hidden');
+        applyBtn.innerText = 'INTERVIEW';
+        applyBtn.classList.remove('bg-[#EEF4FF]','bg-[#FEE2E2]','text-red-700');
+        applyBtn.classList.add('bg-[#D1FAE5]', 'text-green-700', 'border');
 
         const cardInfo = {
             company,
@@ -128,7 +140,14 @@ mainContainer.addEventListener('click', function (event) {
         const postDSC = parentNode.querySelector('.postDSC').innerText
 
 
-        parentNode.querySelector('.applyBtn').innerText = 'REJECTED'
+        // parentNode.querySelector('.applyBtn').innerText = 'REJECTED'
+
+        const applyBtn = parentNode.querySelector('.applyBtn');
+
+        applyBtn.classList.remove('hidden');
+        applyBtn.innerText = 'REJECTED';
+        applyBtn.classList.remove('bg-[#EEF4FF]','bg-[#D1FAE5]','text-green-700');
+        applyBtn.classList.add('bg-[#FEE2E2]', 'text-red-700','border');
 
         const cardInfo = {
             company,
@@ -181,7 +200,7 @@ function rendering() {
 
         <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
         <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
-        <p class="text-gray-500">You haven't marked any job as Interview yet.</p>
+        <p class="text-gray-500">Check back soon for new job opportunities</p>
     </div>`;
         calculateCount();
         return;
@@ -218,7 +237,7 @@ function rendering2() {
         <div class="text-center py-16">
               <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
             <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
-            <p class="text-gray-500">You haven't marked any job as rejected yet.</p>
+            <p class="text-gray-500">Check back soon for new job opportunities</p>
         </div>`
         calculateCount()
         return;
