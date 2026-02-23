@@ -55,7 +55,7 @@ function toggleStyle(id) {
 mainContainer.addEventListener('click', function (event) {
 
     if (event.target.classList.contains('card-interview-btn')) {
-        const parentNode = event.target.closest('.card')
+        const parentNode = event.target.parentNode.parentNode
 
         const company = parentNode.querySelector('.company').innerText;
         const post = parentNode.querySelector('.post').innerText
@@ -87,7 +87,7 @@ mainContainer.addEventListener('click', function (event) {
     }
 
     else if (event.target.classList.contains('card-reject-btn')) {
-        const parentNode = event.target.closest('.card')
+        const parentNode = event.target.parentNode.parentNode
 
         const company = parentNode.querySelector('.company').innerText;
         const post = parentNode.querySelector('.post').innerText
@@ -139,17 +139,20 @@ mainContainer.addEventListener('click', function (event) {
 
 function rendering() {
     filterSection.innerHTML = ''
-//    if (interviewList.length === 0) {
-//         filterSection.innerHTML = `
-//         <div class="text-center py-16">
-//             <i class="fa-solid fa-briefcase bg-gray-200 text-5xl text-gray-300 mb-4"></i>
-//             <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
-//             <p class="text-gray-500">You haven't marked any job as Interview yet.</p>
-//         </div>`
-//         calculateCount()
-//         return;
-//     }
 
+
+    // shurte interview kali takle eta dekabe
+   if (interviewList.length === 0) {
+    filterSection.innerHTML = `
+    <div class="text-center py-16">
+
+        <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
+        <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
+        <p class="text-gray-500">You haven't marked any job as Interview yet.</p>
+    </div>`;
+    calculateCount();
+    return;
+}
     for (let interviewData of interviewList) {
         let div = document.createElement('div');
         div.className = 'card bg-white shadow flex justify-between p-6 mb-4'
@@ -174,16 +177,19 @@ function rendering() {
 
 function rendering2() {
     filterSection.innerHTML = ''
-    // if (interviewList.length === 0) {
-    //     filterSection.innerHTML = `
-    //     <div class="text-center py-16">
-    //         <i class="fa-solid fa-briefcase bg-gray-200 text-5xl text-gray-300 mb-4"></i>
-    //         <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
-    //         <p class="text-gray-500">You haven't marked any job as Interview yet.</p>
-    //     </div>`
-    //     calculateCount()
-    //     return;
-    // }
+
+
+    // shurte interview kali takle eta dekabe
+    if (rejectedList.length === 0) {
+        filterSection.innerHTML = `
+        <div class="text-center py-16">
+              <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
+            <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
+            <p class="text-gray-500">You haven't marked any job as rejected yet.</p>
+        </div>`
+        calculateCount()
+        return;
+    }
 
     for (let rejectedData of rejectedList) {
         let div = document.createElement('div');
