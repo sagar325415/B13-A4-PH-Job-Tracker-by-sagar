@@ -29,16 +29,13 @@ function calculateCount() {
 
 
     const jobCountText = () => {
-        if (currentStatus === 'all-btn') 
-        {
+        if (currentStatus === 'all-btn') {
             return `${totalJobs} jobs`;
-        } 
-        else if (currentStatus === 'interview-btn') 
-        {
+        }
+        else if (currentStatus === 'interview-btn') {
             return `${interviewJobs} of ${totalJobs} jobs`;
-        } 
-        else if (currentStatus === 'rejected-btn') 
-        {
+        }
+        else if (currentStatus === 'rejected-btn') {
             return `${rejectedJobs} of ${totalJobs} jobs`;
         }
     }
@@ -107,7 +104,7 @@ mainContainer.addEventListener('click', function (event) {
 
         applyBtn.classList.remove('hidden');
         applyBtn.innerText = 'INTERVIEW';
-        applyBtn.classList.remove('bg-[#EEF4FF]','bg-[#FEE2E2]','text-red-700');
+        applyBtn.classList.remove('bg-[#EEF4FF]', 'bg-[#FEE2E2]', 'text-red-700');
         applyBtn.classList.add('bg-[#D1FAE5]', 'text-green-700', 'border');
 
         const cardInfo = {
@@ -146,8 +143,8 @@ mainContainer.addEventListener('click', function (event) {
 
         applyBtn.classList.remove('hidden');
         applyBtn.innerText = 'REJECTED';
-        applyBtn.classList.remove('bg-[#EEF4FF]','bg-[#D1FAE5]','text-green-700');
-        applyBtn.classList.add('bg-[#FEE2E2]', 'text-red-700','border');
+        applyBtn.classList.remove('bg-[#EEF4FF]', 'bg-[#D1FAE5]', 'text-green-700');
+        applyBtn.classList.add('bg-[#FEE2E2]', 'text-red-700', 'border');
 
         const cardInfo = {
             company,
@@ -193,12 +190,14 @@ function rendering() {
     filterSection.innerHTML = ''
 
 
-    // shurte interview kali takle eta dekabo
+ 
     if (interviewList.length === 0) {
         filterSection.innerHTML = `
-    <div class="text-center py-16">
+    <div class="text-center py-16 flex justify-center items-center flex-col gap-1">
 
-        <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
+         <div>
+         <img src="./jobs.png" alt="">
+         </div>
         <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
         <p class="text-gray-500">Check back soon for new job opportunities</p>
     </div>`;
@@ -231,14 +230,17 @@ function rendering2() {
     filterSection.innerHTML = ''
 
 
-    // shurte interview kali takle eta dekabe
+    
     if (rejectedList.length === 0) {
         filterSection.innerHTML = `
-        <div class="text-center py-16">
-              <i class="fa-solid fa-file-lines fa-5x mb-4" style="color:#7DA8FF;"></i>
-            <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
-            <p class="text-gray-500">Check back soon for new job opportunities</p>
-        </div>`
+    <div class="text-center py-16 flex justify-center items-center flex-col gap-1">
+
+         <div>
+         <img src="./jobs.png" alt="">
+         </div>
+        <h2 class="text-xl font-semibold text-[#002C5C]">No Jobs Available</h2>
+        <p class="text-gray-500">Check back soon for new job opportunities</p>
+    </div>`
         calculateCount()
         return;
     }
